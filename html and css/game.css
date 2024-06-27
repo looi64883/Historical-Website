@@ -1,0 +1,86 @@
+h2{
+	color: #666;
+	font-family: monospace;
+	text-align: center;
+}
+				
+.background{
+	table-layout: fixed;
+	border-spacing: 0;
+}
+				
+.background td {
+	padding: 0;
+}
+
+.game-container {
+    position: relative;
+}
+
+#exitButton {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    padding: 10px 20px;
+    background-color: #f44336; /* Red color, you can change it */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: monospace;
+    z-index: 1000; /* Ensures button stays on top of other elements */
+}
+
+.lava, .actor{
+	background: #e55;
+}
+
+.wall{
+	background: #444;
+	border: solid 3px #333;
+	box-sizing: content-box;
+}
+				
+.actor{
+	position: absolute;
+}
+				
+.coin{
+	background: #e2e838;
+	border-radius: 50%;
+}
+				
+.player{
+	background: #335699;
+	box-shadow: none;
+}
+
+.npc{
+	background: #d121fc;
+	box-shadow: none;
+}
+				
+.lost .player{
+	background: rgb(160, 64, 64);
+}
+
+.won .player{
+	background: green;
+}
+				
+.game{
+	position: relative;
+	overflow: hidden;
+}
+
+.intro {
+  position: absolute;
+}
+
+.container {
+  text-align: center;
+	color: #666;
+	font-family: monospace;
+}
+
+	

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login Page</title>
+    <link rel="icon" href="images/webicon.png" type="image/png">
+    <style>
+        body {
+            background: url('images/1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+            position: relative;
+            backdrop-filter: blur(8px);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Create a navigation bar with solid buttons */
+        nav {
+            background-color: #333; /* Background color for the navbar */
+            overflow: hidden;
+            position: fixed; /* Fixed position to stay at the top */
+            width: 100%; /* Occupy the full width */
+            top: 0; /* Position at the top */
+            z-index: 1; /* Ensure it appears above other content */
+        }
+
+        /* Style for the buttons */
+        nav button {
+            background-color: #555; /* Button background color */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add a smooth transition */
+        }
+
+        /* Hover effect for buttons */
+        nav button:hover {
+            background-color: #777; /* Darker color on hover */
+        }
+
+        /* Add some space between buttons */
+        nav button:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        /* Align the "Sign In" button to the right */
+        nav button:last-child {
+            margin-left: auto;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 80px; /* Adjust the margin to create space between navbar and login container */
+            width: 300px;
+        }
+
+        .login-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .login-container button {
+            width: calc(100% - 20px);
+            background-color: #555;
+            border: none;
+            color: white;
+            padding: 12px 0;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #777;
+        }
+
+         .underline-buttons {
+            display: flex;
+            flex-direction: row; /* Set flex direction to display links horizontally */
+            justify-content: center; /* Align links at the center horizontally */
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .underline-buttons a {
+            text-decoration: underline;
+            color: #555;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .underline-buttons a:hover {
+            color: #777;
+        }
+
+        .underline-buttons span {
+            color: #555;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation bar with buttons -->
+    <nav>
+        <button><a href="index.php" style="text-decoration: none; color: white;">Home</a></button>
+        <button><a href="Story.php" style="text-decoration: none; color: white;">Story</a></button>
+        <button onclick="checkLoginAndRedirect()">Challenge</button>
+        <button><a href="aboutUs.php" style="text-decoration: none; color: white;">About Us</a></button>
+        <button><a href="Admin.php" style="text-decoration: none; color: white;">Contributors</a></button>
+    </nav>
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <form id="adminLoginForm" method="POST" action="admin_auth.php">
+            <input type="email" name="email" placeholder="Email" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+      
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#adminLoginForm').submit(function(event) {
+                event.preventDefault();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'admin_auth.php',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Admin login successful
+                            window.location.href = 'admin_dashboard.php'; // Update to your admin dashboard page
+                        } else {
+                            alert('Admin login failed. Please check your credentials.');
+                        }
+                    }
+                });
+            });
+        });
+
+        function checkLoginAndRedirect() {
+        var isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true"; // Ensure the correct evaluation
+        if (isLoggedIn) {       
+            window.location.href = 'historicalgame.html'; // Redirect to Challenge page
+        } else {
+            // Show pop-up message
+            var confirmBox = confirm("You need to be logged in to access the Challenge. Do you want to log in?");
+            if (confirmBox == true) {
+                window.location.href = 'SignIn.html'; // Redirect to Sign In page
+            }
+        }
+    }
+    </script>
+</body>
+</html>
